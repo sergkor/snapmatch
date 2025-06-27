@@ -43,9 +43,12 @@ export const analyzeImage = async (imageData: UploadedImage): Promise<ApiRespons
     return data
     */
 
-    // Mock response - remove this when implementing real API
-    return new Promise((resolve) => {
-      setTimeout(() => {
+         // Mock response - remove this when implementing real API
+     // Note: API_CONFIG will be used when you replace this mock implementation
+     console.log('Using mock API instead of:', API_CONFIG.baseUrl)
+     
+     return new Promise((resolve) => {
+       setTimeout(() => {
         resolve({
           success: true,
           products: [
