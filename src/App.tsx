@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import ImageUpload from './components/ImageUpload'
-import ProductDisplay from './components/ProductDisplay'
 import { Product, UploadedImage } from './types'
 import { analyzeImage } from './services/api'
 import './App.css'
+import ProductDisplay from './components/ProductDisplay'
 
 function App() {
   const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(null)
-  const [products, setProducts] = useState<Product[]>([])
+  const [product, setProduct] = useState<Product | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -20,7 +20,7 @@ function App() {
       const response = await analyzeImage(imageData)
       
       if (response.success) {
-        setProducts(response.products)
+        setProduct(response)
       } else {
         setError(response.error || 'Failed to analyze image. Please try again.')
       }
@@ -34,7 +34,7 @@ function App() {
 
   const handleReset = () => {
     setUploadedImage(null)
-    setProducts([])
+    setProduct(null)
     setError(null)
   }
 
@@ -75,8 +75,8 @@ function App() {
               </div>
             )}
 
-            {products.length > 0 && !isLoading && (
-              <ProductDisplay products={products} />
+            {product != null && !isLoading && (
+              <ProductDisplay product={product} />
             )}
           </div>
         )}

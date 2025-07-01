@@ -110,8 +110,10 @@ npm run build
 ```
 
 This generates optimized files in the `dist/` directory:
-- `index.html` - Main HTML file
+- `index.html` - Main HTML file (configured for `/snapmatch/` base path)
 - `assets/` - Bundled and minified CSS/JS files
+
+> **Note**: The build is configured with base path `/snapmatch/` for subdirectory deployments.
 
 ## 🌐 Deployment
 
@@ -119,13 +121,22 @@ The built application (`dist/` folder) can be deployed to any static hosting ser
 
 ### Popular Hosting Options
 
-| Platform | Instructions |
-|----------|-------------|
-| **Vercel** | `npm i -g vercel` → `vercel --prod` |
-| **Netlify** | Drag & drop `dist/` folder to Netlify |
-| **GitHub Pages** | Push `dist/` contents to `gh-pages` branch |
-| **AWS S3** | Upload `dist/` folder to S3 bucket |
-| **Traditional Hosting** | Upload `dist/` contents via FTP |
+| Platform | Instructions | Base Path |
+|----------|-------------|-----------|
+| **Vercel** | `npm i -g vercel` → `vercel --prod` | Auto-detected |
+| **Netlify** | Drag & drop `dist/` folder to Netlify | Auto-detected |
+| **GitHub Pages** | Push `dist/` contents to `gh-pages` branch | Perfect for `/snapmatch/` |
+| **AWS S3** | Upload `dist/` folder to S3 bucket | Configure subdirectory |
+| **Traditional Hosting** | Upload `dist/` contents to `/snapmatch/` folder | Match base path |
+
+### Base Path Configuration
+
+The app is configured with base path `/snapmatch/` which means:
+- ✅ **Works perfectly** when deployed to `yoursite.com/snapmatch/`
+- ✅ **Ideal for GitHub Pages** with repository name "snapmatch"
+- ⚠️ **Requires subdirectory** on traditional hosting (create `/snapmatch/` folder)
+
+To deploy at root domain (`yoursite.com/`), change `base: '/snapmatch/'` to `base: '/'` in `vite.config.ts`
 
 ### Environment Variables
 

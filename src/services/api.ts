@@ -1,37 +1,27 @@
-import { ApiResponse, UploadedImage } from '../types'
+import {  Product, UploadedImage } from '../types'
 
 // Configuration for your external API
 const API_CONFIG = {
-  baseUrl: 'https://your-visual-search-api.com/api',
-  apiKey: 'your-api-key-here', // Store this in environment variables
+  baseUrl: 'https://skorniychuk--snap-vsa-model-snap-dev.modal.run',
+  apiKey: 'key', // Store this in environment variables
   timeout: 30000, // 30 seconds
 }
 
 /**
  * Analyzes an image using an external visual search API
  * @param imageData - The uploaded image data with base64 encoding
- * @returns Promise<ApiResponse> - The API response with product information
+ * @returns Promise<Product> - The API response with product information
  */
-export const analyzeImage = async (imageData: UploadedImage): Promise<ApiResponse> => {
+export const analyzeImage = async (imageData: UploadedImage): Promise<Product> => {
   try {
-    // TODO: Replace this mock implementation with actual API call
-    
-    // Example of how to make the API call:
-    /*
-    const response = await fetch(`${API_CONFIG.baseUrl}/analyze`, {
+    console.log('Analyzing image:', imageData)
+    const response = await fetch(`${API_CONFIG.baseUrl}/snap`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_CONFIG.apiKey}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        image: imageData.base64,
-        // Add other parameters as required by your API
-        options: {
-          maxResults: 10,
-          minConfidence: 0.5,
-          includeMetadata: true,
-        }
+        image: imageData.base64
       }),
     })
 
@@ -41,8 +31,8 @@ export const analyzeImage = async (imageData: UploadedImage): Promise<ApiRespons
 
     const data = await response.json()
     return data
-    */
-
+    
+/*
          // Mock response - remove this when implementing real API
      // Note: API_CONFIG will be used when you replace this mock implementation
      console.log('Using mock API instead of:', API_CONFIG.baseUrl)
@@ -80,12 +70,11 @@ export const analyzeImage = async (imageData: UploadedImage): Promise<ApiRespons
         })
       }, 2000) // Simulate API delay
     })
-
+*/
   } catch (error) {
     console.error('Error analyzing image:', error)
     return {
       success: false,
-      products: [],
       error: error instanceof Error ? error.message : 'Unknown error occurred'
     }
   }

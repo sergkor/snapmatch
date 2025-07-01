@@ -1,20 +1,16 @@
-export interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  imageUrl: string;
-  category: string;
-  brand?: string;
-  availability: string;
-  rating?: number;
-  reviewCount?: number;
-}
 
-export interface ApiResponse {
+
+export interface Product {
   success: boolean;
-  products: Product[];
   error?: string;
+  name?: string;
+  description?: string;
+  style?: string;
+  features?: string;
+  audience?: string;
+  quality?: string;
+  keywords?: string[];
+  category?: string[];
 }
 
 export interface UploadedImage {
